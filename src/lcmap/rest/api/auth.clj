@@ -44,7 +44,7 @@
 ;; If we want to use our own exceptions, we can catch those in the following
 ;; manner:
 (with-handler! #'login
-  [:type 'Auth-Error]
+  [:error-type 'Auth-Error]
   (fn [e & args]
     (log/error e)
     (http/response :errors [e])))

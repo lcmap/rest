@@ -36,10 +36,7 @@
 
 (schema/defn run-typed-model
   ""
-  [db :- Any
-   eventd :- Any
-   seconds :- StrInt
-   year :- StrYear]
+  [^Any db ^Any eventd ^StrInt seconds ^StrYear year]
   ;; generate job-id from hash of args
   ;; return status code 200 with body that has link to where sample result will
   ;; be

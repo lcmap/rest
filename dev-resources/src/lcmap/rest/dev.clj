@@ -23,9 +23,11 @@
             [clojurewerkz.cassaforte.cql :as cql]
             [clojurewerkz.cassaforte.query :as query]
             ;; data types
+            [schema.core :as schema]
             [byte-streams]
             [clj-time.coerce :as time]
             [clojure.data.codec.base64 :as b64]
+            [lcmap.rest.types :as types]
             ;; metrics
             [metrics.core :as metrics]
             ;; shell execution

@@ -3,6 +3,24 @@
             [clojure.string :as string]
             [schema.core :as schema]))
 
+;;; Validation Functions; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defmacro with-validation
+  ""
+  [func & args]
+  (try
+    (schema/with-fn-validation
+      (apply func args))
+    (catch RuntimeException e
+      (throw+
+      (let [error (.getMessage e)]
+        (log/error "Got error:" error)
+        (->
+          (http/response :errors [error]
+                         :status status/client-error)
+          ;; update to take mime sub-type from Accept
+          (http/problem-header))))))
+
 ;;; Supporting Predicates ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn matches?
